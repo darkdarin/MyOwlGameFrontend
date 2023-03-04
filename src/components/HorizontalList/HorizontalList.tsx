@@ -1,21 +1,27 @@
 import React, {ReactNode} from 'react';
 
 type TListProps = {
-    title: string,
-    children: ReactNode
+    title: string;
+    button?: ReactNode;
+    children: ReactNode;
 }
 
-export function HorizontalList<Type extends TElementWithId>({title, children}: TListProps) {
+export function HorizontalList({title, button, children}: TListProps) {
     return (
-        <div className="flex-col w-64 bg-white h-full border-r">
-            <div className="overflow-y-auto overflow-x-hidden flex-grow">
-                <ul className="flex flex-col py-4 space-y-1">
-                    <li className="px-5">
-                        <div className="flex flex-row items-center h-8">
-                            <div className="text-sm font-light tracking-wide text-gray-500">{title}</div>
+        <div className="w-full bg-white h-12 border-b">
+            <div className="overflow-x-auto flex-grow">
+                <ul className="flex flex-row space-x-1">
+                    <li>
+                        <div className="flex flex-row items-center h-12">
+                            <div className="text-sm tracking-wide text-gray-500 font-bold px-4">{title}</div>
                         </div>
                     </li>
                     {children}
+                    {button && (
+                        <li>
+                            <div className="flex flex-row items-center h-12 pl-2">{button}</div>
+                        </li>
+                    )}
                 </ul>
             </div>
         </div>

@@ -6,9 +6,9 @@ import {RoomsPage} from "./pages/RoomsPage/RoomsPage";
 
 function App() {
     return (
-        <div className="container mx-auto bg-white border-x border-b rounded-b-md h-screen">
+        <div className="container mx-auto bg-white border-x border-b rounded-b-md min-h-screen antialiased">
             <Navigation/>
-            <div className="container mx-auto h-full">
+            <div className="container mx-auto h-screen">
                 <Routes>
                     <Route path="/*" element={<CabinetPage/>}/>
                     <Route path="/friends" element={<FriendsPage/>}/>
