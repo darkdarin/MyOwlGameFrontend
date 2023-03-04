@@ -1,18 +1,21 @@
 import {Route, Routes} from 'react-router-dom';
-import {ProductsPage} from "./pages/ProductsPage";
-import {AboutPage} from "./pages/AboutPage";
 import {Navigation} from "./components/Navigation";
+import {CabinetPage} from "./pages/CabinetPage/CabinetPage";
+import {FriendsPage} from "./pages/FriendsPage/FriendsPage";
+import {RoomsPage} from "./pages/RoomsPage/RoomsPage";
 
 function App() {
     return (
-        <div className="container mx-auto px-5">
+        <div className="container mx-auto bg-white border-x border-b rounded-b-md h-screen">
             <Navigation/>
-            <Routes>
-                <Route path="/" element={ <ProductsPage /> } />
-                <Route path="/about" element={ <AboutPage /> } />
-            </Routes>
+            <div className="container mx-auto h-full">
+                <Routes>
+                    <Route path="/*" element={<CabinetPage/>}/>
+                    <Route path="/friends" element={<FriendsPage/>}/>
+                    <Route path="/rooms" element={<RoomsPage/>}/>
+                </Routes>
+            </div>
         </div>
-
     )
 }
 
