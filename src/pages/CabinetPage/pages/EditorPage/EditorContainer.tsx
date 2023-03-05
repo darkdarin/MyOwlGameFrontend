@@ -1,21 +1,22 @@
 import React from 'react';
-import {Rounds} from "./components/rounds";
-import {connect} from "react-redux";
+import { Rounds } from './components/Rounds';
+import { useGetPackQuery } from '../../../../store/PackEditor/PackEditorApi';
+import { Error, Loader } from '../../../../components/Elements';
 
-type TEditorContainerProps = {
-    pack: TPack
+type TProps = {
+  packId: number;
 }
 
-function EditorContainer({pack}: TEditorContainerProps): JSX.Element {
-    return (
-        <Rounds rounds={pack.rounds}/>
-    )
-}
+export function EditorContainer({ packId }: TProps): JSX.Element {
+  const { isLoading, isError, data } = useGetPackQuery(packId);
 
-const mapStateToProps = ({ editor }: TCabinetState): TEditorContainerProps => {
-    return {
-        pack: editor.pack
-    }
+  return (
+    <>
+      {isLoading && <Loader />}
+      {isError && <Error>
+        <div>Произошла ошибка при загрузке списка раундов</div>
+      </Error>}
+      {!isLoading && !isError && data && <Rounds packId={data.id} rounds={data.rounds} />}
+    </>
+  );
 }
-
-export default connect(mapStateToProps)(EditorContainer);

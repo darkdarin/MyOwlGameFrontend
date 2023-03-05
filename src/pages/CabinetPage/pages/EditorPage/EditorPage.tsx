@@ -1,8 +1,12 @@
 import React from 'react';
-import EditorContainer from "./EditorContainer";
+import { EditorContainer } from './EditorContainer';
 
-export function EditorPage() {
-    return (
-        <EditorContainer />
-    )
+type TProps = {
+  packId: number;
+}
+
+export function EditorPage({packId}: TProps): JSX.Element {
+  return (
+    <EditorContainer packId={packId}/>
+  );
 }

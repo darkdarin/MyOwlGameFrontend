@@ -1,29 +1,27 @@
-declare type TElementWithId = {
-    id: number;
-}
-
 declare type TPack = {
-    name: string;
-    author: string;
-    rounds: Array<TRound>;
+  id: number;
+  name: string;
+  author: string;
+  rounds: TRound[];
 }
 
-declare type TRound = TElementWithId & {
-    name: string;
-    is_final?: boolean;
-    themes: Array<TTheme>;
+declare type TRound = {
+  id: number;
+  name: string;
+  is_final: boolean;
+  themes: TTheme[];
 }
 
-declare type TTheme = TElementWithId & {
-    id: number;
-    name: string;
-    questions: Array<TQuestion>;
+declare type TTheme = {
+  id: number;
+  name: string;
+  questions: TQuestion[];
 }
 
-declare type TQuestion = TElementWithId & {
-    id: number
-    type: string;
-    cost: number;
-    text: string;
-    answer: string;
+declare type TQuestion = {
+  id: number
+  type: string;
+  cost: number;
+  text: string;
+  answers: string;
 }
