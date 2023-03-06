@@ -11,9 +11,8 @@ export function Input({ name, label, value, onChange }: TProps): JSX.Element {
   const [localValue, setLocalValue] = useState(value);
 
   const changeInputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-
     setLocalValue(() => e.target.value);
-    onChange && onChange(name, localValue);
+    onChange && onChange(name, e.target.value);
   }
 
   return (

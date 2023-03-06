@@ -5,7 +5,12 @@ import { Button, EButtonStyle } from 'components/Elements/Button';
 import { PencilIcon, PlusIcon, TrashIcon } from '@heroicons/react/24/outline';
 import { ConfirmModal, Modal } from 'components/Elements';
 import { EditRoundForm } from './EditRoundForm';
-import { useAddRoundMutation, useDeleteRoundMutation, useGetRoundsQuery } from 'store/PackEditor/PackEditorApi';
+import {
+  useAddRoundMutation,
+  useDeleteRoundMutation,
+  useGetRoundsQuery,
+  useUpdateRoundMutation
+} from 'store/PackEditor/PackEditorApi';
 
 type TProps = {
   packId: number;
@@ -20,6 +25,7 @@ const newRound: Partial<TRound> = {
 export function Rounds({ packId }: TProps): JSX.Element {
   const { data } = useGetRoundsQuery(packId);
   const [addRound] = useAddRoundMutation();
+  const [updateRound] = useUpdateRoundMutation();
   const [deleteRound] = useDeleteRoundMutation();
 
   let rounds = data ?? [];
@@ -36,7 +42,9 @@ export function Rounds({ packId }: TProps): JSX.Element {
   };
 
   const onEditRound = (round: TRound): void => {
+    updateRound(round);
 
+    setEditFormShow(false);
   };
   const onDeleteRound = (): void => {
     activeRoundId && deleteRound(activeRoundId);

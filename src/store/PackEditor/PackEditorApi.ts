@@ -25,6 +25,16 @@ export const PackEditorApi = createApi({
       ),
       invalidatesTags: result => ['Round']
     }),
+    updateRound: build.mutation<TRound, TRound>({
+      query: (round) => (
+        {
+          url: `round/${round.id}`,
+          method: 'POST',
+          body: round
+        }
+      ),
+      invalidatesTags: result => ['Round']
+    }),
     deleteRound: build.mutation<void, number>({
       query: (roundId) => (
         {
@@ -37,8 +47,15 @@ export const PackEditorApi = createApi({
     getThemes: build.query<TTheme[], number>({
       query: (roundId: number) => `round/${roundId}/themes`,
       providesTags: result => ['Theme']
-    }),
-  }),
+    })
+  })
 });
 
-export const { useGetPackQuery, useGetRoundsQuery, useAddRoundMutation, useDeleteRoundMutation, useGetThemesQuery } = PackEditorApi;
+export const {
+  useGetPackQuery,
+  useGetRoundsQuery,
+  useAddRoundMutation,
+  useUpdateRoundMutation,
+  useDeleteRoundMutation,
+  useGetThemesQuery
+} = PackEditorApi;
