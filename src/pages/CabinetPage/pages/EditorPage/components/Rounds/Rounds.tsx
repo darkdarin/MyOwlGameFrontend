@@ -3,7 +3,7 @@ import { List, ListItem } from 'components/Lists';
 import { Themes } from '../Themes';
 import { Button, EButtonStyle } from 'components/Elements/Button';
 import { PencilIcon, PlusIcon, TrashIcon } from '@heroicons/react/24/outline';
-import { ConfirmModal, Modal } from 'components/Elements';
+import { ConfirmModal, Error, Loader, Modal } from 'components/Elements';
 import { EditRoundForm } from './EditRoundForm';
 import {
   useAddRoundMutation,
@@ -23,7 +23,7 @@ const newRound: Partial<TRound> = {
 };
 
 export function Rounds({ packId }: TProps): JSX.Element {
-  const { data } = useGetRoundsQuery(packId);
+  const { isLoading, isError, data } = useGetRoundsQuery(packId);
   const [addRound] = useAddRoundMutation();
   const [updateRound] = useUpdateRoundMutation();
   const [deleteRound] = useDeleteRoundMutation();
@@ -76,7 +76,9 @@ export function Rounds({ packId }: TProps): JSX.Element {
         </>
       }>
         <>
-          {rounds.map((round) => (
+          {isLoading && <Loader />}
+          {isError && <Error><div>Произошла ошибка при загрузке списка раундов</div></Error>}
+          {!isLoading && !isError && rounds.map((round) => (
             <ListItem isActive={activeRound?.id === round.id}
                       text={round.name}
                       key={round.id}

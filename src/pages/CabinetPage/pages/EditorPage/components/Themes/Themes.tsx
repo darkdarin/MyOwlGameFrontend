@@ -4,6 +4,7 @@ import { List, ListItem } from 'components/Lists';
 import { Button, EButtonStyle } from 'components/Elements/Button';
 import { PlusIcon } from '@heroicons/react/24/outline';
 import { useGetThemesQuery } from '../../../../../../store/PackEditor/PackEditorApi';
+import { Error, Loader } from '../../../../../../components/Elements';
 
 type TProps = {
   roundId: number;
@@ -11,7 +12,7 @@ type TProps = {
 }
 
 export function Themes({ roundId }: TProps): JSX.Element {
-  const { data } = useGetThemesQuery(roundId);
+  const { isLoading, isError, data } = useGetThemesQuery(roundId);
   let themes = data ?? [];
 
   const [activeThemeId, setTheme] = useState<number | null>(null);
@@ -29,7 +30,9 @@ export function Themes({ roundId }: TProps): JSX.Element {
         </Button>
       }>
         <>
-          {themes.map((theme) => (
+          {isLoading && <Loader />}
+          {isError && <Error><div>Произошла ошибка при загрузке списка тем</div></Error>}
+          {!isLoading && !isError && themes.map((theme) => (
             <ListItem isActive={activeTheme?.id === theme.id}
                       text={theme.name}
                       key={theme.id}

@@ -13,9 +13,7 @@ export function EditorContainer({ packId }: TProps): JSX.Element {
   return (
     <>
       {isLoading && <Loader />}
-      {isError && <Error>
-        <div>Произошла ошибка при загрузке списка раундов</div>
-      </Error>}
+      {isError && <Error><div>Произошла ошибка при загрузке пака</div></Error>}
       {!isLoading && !isError && data && <Rounds packId={data.id} rounds={data.rounds} />}
     </>
   );
