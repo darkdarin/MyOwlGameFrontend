@@ -20,8 +20,16 @@ declare type TTheme = {
 
 declare type TQuestion = {
   id: number
-  type: string;
+  type: EQuestionType;
   cost: number;
   text: string;
   answers: string;
+}
+
+declare enum EQuestionType {
+  Default = 'default',
+  Auction = 'auction',
+  Secret = 'secret',
+  CatInBag = 'catInBag',
+  NoRisk = 'noRisk',
 }

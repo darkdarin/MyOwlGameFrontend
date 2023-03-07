@@ -11,15 +11,15 @@ import {
   useGetRoundsQuery,
   useUpdateRoundMutation
 } from 'store/PackEditor/PackEditorApi';
+import { ButtonPanel } from '../../../../../../components/Elements/ButtonPanel';
 
 type TProps = {
   packId: number;
-  rounds: TRound[];
 }
 
 const newRound: Partial<TRound> = {
   name: '',
-  is_final: false
+  is_final: false,
 };
 
 export function Rounds({ packId }: TProps): JSX.Element {
@@ -63,7 +63,7 @@ export function Rounds({ packId }: TProps): JSX.Element {
   return (
     <div className='flex h-full'>
       <List title='Раунды' button={
-        <>
+        <ButtonPanel>
           <Button onClick={() => setAddFormShow(true)} style={EButtonStyle.Primary}>
             <PlusIcon className='h-3 w-3' />
           </Button>
@@ -73,7 +73,7 @@ export function Rounds({ packId }: TProps): JSX.Element {
           <Button onClick={() => setDeleteConfirmShow(true)} disabled={!activeRoundId}>
             <TrashIcon className='h-3 w-3' />
           </Button>
-        </>
+        </ButtonPanel>
       }>
         <>
           {isLoading && <Loader />}
@@ -89,7 +89,7 @@ export function Rounds({ packId }: TProps): JSX.Element {
         </>
       </List>
       <div className='flex-col w-full h-full'>
-        {activeRound && <Themes roundId={activeRound.id} themes={activeRound.themes} />}
+        {activeRound && <Themes roundId={activeRound.id} />}
       </div>
       {addFormShow &&
         <Modal title='Добавление раунда'>
